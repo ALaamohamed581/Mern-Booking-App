@@ -1,5 +1,5 @@
 import { regsiterFormData, signInData } from "../types";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_UR || "";
 export const register = async (formData: regsiterFormData) => {
   const response = await fetch(`${API_BASE_URL}api/v1/user/register`, {
     method: "POST",

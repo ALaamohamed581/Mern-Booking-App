@@ -18,18 +18,21 @@ app.use(
   })
 );
 
-app.set("view engine", "ejs");
-app.set("views", "views");
-app.set("views", path.join(__dirname, "views"));
-//root route
-app.get("/api/test", async (req: Request, res: Response) => {
-  res.render("index");
-});
+// app.set("view engine", "ejs");
+// app.set("views", "views");
+// app.set("views", path.join(__dirname, "views"));
+// //root route
+// app.get("/api/test", async (req: Request, res: Response) => {
+//   res.render("index");
+// });
+app.use(
+  express.static(path.join(__dirname, "../../../frontend/frontend/dist"))
+);
 app.use(userRoute);
 app.use(errorHandler);
 
 dataBaseConnnedtion();
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`server working on ${port}`);
 });

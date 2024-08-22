@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import AppError from "../../helpers/AppError";
-import { message } from "antd";
 
 declare global {
   namespace Express {
