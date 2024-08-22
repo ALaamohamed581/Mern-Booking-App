@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Express App</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f06, #4a90e2);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #fff;
+        animation: backgroundAnimation 10s infinite alternate;
+      }
+
+      @keyframes backgroundAnimation {
+        0% {
+          background: linear-gradient(135deg, #f06, #4a90e2);
+        }
+        100% {
+          background: linear-gradient(135deg, #4a90e2, #f06);
+        }
+      }
+
+      .container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h1 {
+        margin: 0 0 20px;
+        font-size: 2em;
+        color: #333;
+        animation: colorChange 5s infinite alternate;
+      }
+
+      @keyframes colorChange {
+        0% {
+          color: #333;
+        }
+        100% {
+          color: #f06;
+        }
+      }
+
+      h1:hover {
+        color: #4a90e2;
+        transition: color 0.3s ease;
+      }
+
+      canvas {
+        border: 1px solid #333;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to My Express App</h1>
+      <h1>Nice App</h1>
+      <canvas id="myCanvas" width="400" height="200"></canvas>
+    </div>
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+
+      let x = 0;
+      let y = 100;
+      let dx = 2;
+      let lines = [];
+
+      for (let i = 0; i < 5; i++) {
+        lines.push({
+          x1: Math.random() * canvas.width,
+          y1: Math.random() * canvas.height,
+          x2: Math.random() * canvas.width,
+          y2: Math.random() * canvas.height,
+          dx1: (Math.random() - 0.5) * 4,
+          dy1: (Math.random() - 0.5) * 4,
+          dx2: (Math.random() - 0.5) * 4,
+          dy2: (Math.random() - 0.5) * 4,
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw circle
+        ctx.beginPath();
+        ctx.arc(x, y, 20, 0, Math.PI * 2, false);
+        ctx.fillStyle = "#f06";
+        ctx.fill();
+        ctx.closePath();
+
+        // Draw lines
+        lines.forEach((line) => {
+          ctx.beginPath();
+          ctx.moveTo(line.x1, line.y1);
+          ctx.lineTo(line.x2, line.y2);
+          ctx.strokeStyle = "#4a90e2";
+          ctx.stroke();
+          ctx.closePath();
+
+          // Update line positions
+          line.x1 += line.dx1;
+          line.y1 += line.dy1;
+          line.x2 += line.dx2;
+          line.y2 += line.dy2;
+
+          // Bounce lines off the edges
+          if (line.x1 < 0 || line.x1 > canvas.width) line.dx1 = -line.dx1;
+          if (line.y1 < 0 || line.y1 > canvas.height) line.dy1 = -line.dy1;
+          if (line.x2 < 0 || line.x2 > canvas.width) line.dx2 = -line.dx2;
+          if (line.y2 < 0 || line.y2 > canvas.height) line.dy2 = -line.dy2;
+        });
+
+        // Update circle position
+        x += dx;
+        if (x > canvas.width || x < 0) {
+          dx = -dx;
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    </script>
+  </body>
+</html>
