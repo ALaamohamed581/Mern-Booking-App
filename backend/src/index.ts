@@ -35,9 +35,10 @@ app.use(morgan("short"));
 
 app.use(userRoute);
 app.use(errorHandler);
+
 app.use("*", (req: Request, res: Response) => {
   res.sendFile(
-    path.join(__dirname, ".../../../frontend/forntend/dist/index.html")
+    path.join(__dirname, "../../../frontend/frontend/dist/index.html")
   );
 });
 dataBaseConnnedtion();
