@@ -8,7 +8,7 @@ app.use("/api/v1/user", userROutes);
 app.use("/api/v1/my-hotel-routes", myHotelRoutes);
 app.use("*", (req: Request, res: Response) => {
   res.sendFile(
-    path.join(__dirname, "../../../frontend/forntend/dist/index.html")
+    path.join(__dirname, "../../../frontend/frontend/dist/index.html")
   );
 });
 export default app;
