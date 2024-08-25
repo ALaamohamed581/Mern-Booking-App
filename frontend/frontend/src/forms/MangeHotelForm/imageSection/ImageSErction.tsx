@@ -24,7 +24,9 @@ const ImageSection = () => {
 
       Promise.all(fileReaders).then((files) => {
         setPreviews(files);
-        setValue("Images", acceptedFiles); // Set the value of the Images field
+        const fileList = new DataTransfer();
+        acceptedFiles.forEach((file) => fileList.items.add(file));
+        setValue("Images", fileList.files); // Set the value of the Images field
       });
     },
     [setValue]
