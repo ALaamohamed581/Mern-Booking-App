@@ -35,7 +35,11 @@ app.use(morgan("short"));
 
 app.use(userRoute);
 app.use(errorHandler);
-
+app.use("*", (req: Request, res: Response) => {
+  res.sendFile(
+    path.join(__dirname, ".../../../frontend/forntend/dist/index.html")
+  );
+});
 dataBaseConnnedtion();
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
