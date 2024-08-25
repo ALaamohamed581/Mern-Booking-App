@@ -4,7 +4,8 @@ import Userschemas from "../../middleware/validatins/user.validions";
 import {
   register,
   login,
-} from "../../controllers/userControllers/user.authController";
+  logOut,
+} from "../../controllers/userControllers/usercontrollers/user.authController";
 import { verifyToken } from "../../middleware/verifyToken/token.validate.ts";
 const app = express.Router();
 
@@ -13,8 +14,7 @@ app.post("/sign-in", validator(Userschemas.signIn) /* register*/, login);
 app.get("/validate-token", verifyToken, (req, res) => {
   res.status(200).send({ userId: req.userId });
 });
-app.post("/sign-out", (req, res) => {
-  res.cookie("authCookie", "", { expires: new Date(0) });
-  res.send();
-});
+
+app.post("/sign-out", logOut);
+
 export default app;

@@ -55,7 +55,7 @@ const Userschemas = {
   }),
 
   imageUpload: Joi.object({
-    image: Joi.object().required().messages({
+    image: Joi.object().optional().messages({
       "any.required": "Image is required",
       "object.base": "Image must be an object",
     }),

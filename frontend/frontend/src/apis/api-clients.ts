@@ -1,5 +1,5 @@
 import { regsiterFormData, signInData } from "../types";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_UR || "";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 export const register = async (formData: regsiterFormData) => {
   const response = await fetch(`${API_BASE_URL}api/v1/user/register`, {
     method: "POST",
@@ -50,4 +50,17 @@ export const signOut = async () => {
     method: "POST",
   });
   if (!response.ok) throw new Error("error during log out");
+};
+
+export const addMyHotel = async (HotelFormData: FormData) => {
+  const response = await fetch(`${API_BASE_URL}api/v1/my-hotel-routes/create`, {
+    method: "POST",
+    credentials: "include",
+    body: HotelFormData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Faild to add hotel");
+  }
+  return response.json();
 };

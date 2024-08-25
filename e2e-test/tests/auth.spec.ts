@@ -30,7 +30,9 @@ test("should allow user to regsiter", async ({ page }) => {
 
   await page.locator("[name=firstName]").fill("name");
   await page.locator("[name=lastName]").fill("name");
-  await page.locator("[name=email]").fill("331@gmail.com");
+  await page
+    .locator("[name=email]")
+    .fill(`${Math.random() * 1000}23@gmail.com`);
   await page.locator("[name=password]").fill("1@1.com");
   await page.locator("[name=confirmPassword]").fill("1@1.com");
 

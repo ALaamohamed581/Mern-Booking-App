@@ -1,8 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import cactchAsync from "../../utuls/catchAsync";
-import AppError from "../../helpers/AppError";
-import { createUser, signIn } from "../../repostories/userRepo";
-import { opertionAlObject } from "../../../types";
+import cactchAsync from "../../../utuls/catchAsync";
+import AppError from "../../../helpers/AppError";
+import {
+  createUser,
+  signIn,
+  signOut,
+} from "../../../repostories/userRepo/userAuthRepo";
+import { opertionAlObject } from "../../../../types";
 
 export const register = cactchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -62,5 +66,24 @@ export const login = cactchAsync(
         message: operationResultObjec.message,
         data: operationResultObjec.data[0],
       });
+  }
+);
+
+export const logOut = cactchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const operationResultObjec = (await signOut()) as opertionAlObject;
+    if (!operationResultObjec?.success) {
+      return next(
+        new AppError(
+          operationResultObjec?.message!,
+          operationResultObjec?.code!
+        )
+      );
+    }
+    res.cookie("authCookie", operationResultObjec.data[1], {
+      expires: new Date(0),
+    });
+
+    res.send();
   }
 );
