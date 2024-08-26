@@ -10,7 +10,6 @@ const MyHotels = () => {
   const navigate = useNavigate();
   const quertClient = useQueryClient();
   const [page, setPage] = useState(1);
-  const url = new URL("/my-hotels", window.location.origin); //
 
   const fetchMyHotels = async () => {
     return await apiClient.fetchMyHotels(page);
@@ -29,6 +28,7 @@ const MyHotels = () => {
   if (!hotelData) {
     return <span>no hotel found</span>;
   }
+
   const prevpag = () => {
     navigate(`?page=${page}`, {
       replace: true,
@@ -118,5 +118,4 @@ const MyHotels = () => {
     </div>
   );
 };
-
 export default MyHotels;
