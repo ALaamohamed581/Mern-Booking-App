@@ -22,6 +22,7 @@ export const verifyToken = (
   try {
     const decoaded = jwt.verify(token, process.env.JWT_SERCERT as string);
     req.userId = (decoaded as JwtPayload).userId;
+
     next();
   } catch (err) {
     console.log(err);

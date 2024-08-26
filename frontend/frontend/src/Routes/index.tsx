@@ -4,6 +4,7 @@ import Home from "../pasges/Home";
 import Register from "../pasges/register";
 import SignIn from "../pasges/signIn";
 import Hotel from "../pasges/hotel";
+import MyHotels from "../pasges/myHotels";
 
 const routesConfig = (isLoggedIn: boolean) => {
   const routes = [
@@ -24,6 +25,7 @@ const routesConfig = (isLoggedIn: boolean) => {
           path: "/register",
           element: <Register />,
         },
+
         {
           path: "/sign-in",
           element: <SignIn />,
@@ -37,6 +39,12 @@ const routesConfig = (isLoggedIn: boolean) => {
     routes[0].children?.push({
       path: "/addHotel",
       element: <Hotel />,
+    });
+  }
+  if (isLoggedIn) {
+    routes[0].children?.push({
+      path: "/my-hotels",
+      element: <MyHotels />,
     });
   }
 

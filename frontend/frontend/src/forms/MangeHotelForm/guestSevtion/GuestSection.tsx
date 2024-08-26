@@ -17,18 +17,23 @@ const GuestSection = () => {
             required: "this field is required",
           })}
         />
-        {errors.pricePerNight && (
+        {errors.adultCount && (
           <span className="text-red-500 text-sm">
-            {errors.pricePerNight.message}
+            {errors.adultCount.message}
           </span>
         )}
       </label>
       <label className="flex flex-col flex-1 p-5 font-semibold">
         <span>Child count</span>
-        <input type="number" {...register("childCount")} min={0} />
-        {errors.pricePerNight && (
+        <input
+          type="number"
+          {...register("childCount")}
+          min={0}
+          defaultValue={0}
+        />
+        {errors.childCount && (
           <span className="text-red-500 text-sm">
-            {errors.pricePerNight.message}
+            {errors.childCount.message}
           </span>
         )}
       </label>

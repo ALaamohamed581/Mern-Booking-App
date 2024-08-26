@@ -39,8 +39,32 @@ test("should allow users to add hoteles", async ({ page }) => {
   await page.locator('[name="childCount"]').fill("6");
   await page.setInputFiles('[name="Images"]', [
     path.join(__dirname, "f", "1.jpg"),
-    path.join(__dirname, "f", "3.jpg"),
+    path.join(__dirname, "f", "2.jpg"),
   ]);
   await page.getByRole("button", { name: "save" }).click();
   await expect(page.getByText("Hotel Created")).toBeVisible();
+});
+
+test("should display all users hote data on screen ", async ({ page }) => {
+  await page.goto(Ui_URL);
+  await page.getByRole("link", { name: "Sing In" }).click();
+  // Expect a title "to contain" a substring.
+  await expect(page.getByRole("heading", { name: "Sing In" })).toBeVisible();
+
+  await page.locator("[name=email]").fill("1@1.com");
+  await page.locator("[name=password]").fill("1@1.com");
+
+  await page.getByRole("button", { name: "SignIn" }).click();
+
+  await page.getByRole("link", { name: "my Hotels" }).click();
+
+  await expect(page.getByRole("heading", { name: "My Hotels" })).toBeVisible();
+
+  await expect(page.getByText("alaaHotel1")).toBeVisible();
+  await expect(page.getByText("56,75")).toBeVisible();
+
+  await expect(page.getByRole("link", { name: "Add Hotel" })).toBeVisible();
+
+  await page.getByRole("link", { name: "Add Hotel" }).click();
+  await expect(page.locator("[name=name]")).toBeVisible();
 });

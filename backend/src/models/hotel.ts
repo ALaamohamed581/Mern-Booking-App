@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import { HotelType } from "../../types/HotelTypes";
+import { HotelType } from "../shared/sharedTypes/HotelTypes";
 
 const hotelSchma = new mongoose.Schema<HotelType>({
   userId: { type: String, required: true },
   name: { type: String, required: true },
   city: { type: String, required: true },
   country: { type: String, required: true },
-  adultCount: { type: Number, required: true },
+  adultCount: { type: Number, required: true, default: 0 },
   childCount: { type: Number, required: true },
   description: { type: String, required: true },
   facilities: [{ type: String, required: true }],
