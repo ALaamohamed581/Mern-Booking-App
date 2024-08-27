@@ -9,6 +9,7 @@ declare global {
     }
   }
 }
+
 export const verifyToken = (
   req: Request,
   res: Response,

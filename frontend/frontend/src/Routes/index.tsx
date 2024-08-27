@@ -5,6 +5,7 @@ import Register from "../pasges/register";
 import SignIn from "../pasges/signIn";
 import Hotel from "../pasges/hotel";
 import MyHotels from "../pasges/myHotels";
+import EditHotel from "../pasges/editHotel";
 
 const routesConfig = (isLoggedIn: boolean) => {
   const routes = [
@@ -46,6 +47,12 @@ const routesConfig = (isLoggedIn: boolean) => {
       path: "/my-hotels",
       element: <MyHotels />,
     });
+    if (isLoggedIn) {
+      routes[0].children?.push({
+        path: "/edit-hotel/:hotelId",
+        element: <EditHotel />,
+      });
+    }
   }
 
   return createBrowserRouter(routes);

@@ -3,6 +3,7 @@ import sharp from "sharp";
 import { Request, Response, NextFunction } from "express";
 import AppError from "../../helpers/AppError";
 import path from "path";
+import { v2 as cloudinary } from "cloudinary";
 
 const multerStorage = multer.memoryStorage();
 const multerFiltter = (
@@ -29,16 +30,21 @@ export const resizeUserPhoto = async (
   res: Response,
   next: NextFunction
 ) => {
-  const directory = path.join(__dirname, "../../public/images/users");
-  if (!req.file) return next();
+  // 1)  make an array of buffers
+  const imageFile = req.file as Express.Multer.File;
+  //2) convert it to base 64 strings
 
-  req.file.filename = `${req.params.userId}--${
-    Math.random() * Date.now() * 26484 * 2
-  }--main.jpeg`;
-  await sharp(req.file.buffer)
-    .resize({ width: 500, height: 500 })
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toFile(`${directory}/${req.file.filename}`);
-  return next();
+  const b64 = Buffer.from(imageFile.buffer).toString("base64");
+  //3) new imagesNaems
+
+  const dataUrl = `data:image/jpeg;base64,${b64}`;
+  //4) upload to cloundinary
+
+  const img = await cloudinary.uploader.upload(dataUrl);
+
+  const iamgeUrl = await Promise.resolve(img.url);
+
+  req.body.image = iamgeUrl;
+
+  next();
 };

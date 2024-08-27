@@ -53,7 +53,7 @@ const hotelSchemas = {
     childCount: Joi.number().optional(),
     description: Joi.string().optional(),
     facilities: Joi.array().items(Joi.string().optional()).optional(),
-    imageURLs: Joi.array().items(Joi.string().optional()).optional(),
+    // imageURLs: Joi.array().items(Joi.string().optional()).optional(),
     type: Joi.string().optional(),
     pricePerNight: Joi.number().optional(),
     starRating: Joi.number().min(1).max(5).optional(),

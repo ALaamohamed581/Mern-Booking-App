@@ -1,16 +1,23 @@
 import { useFormContext } from "react-hook-form";
 import { HotelFormData } from "../../../types";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { BsTrash } from "react-icons/bs";
 
 const ImageSection = () => {
-  const [previews, setPreviews] = useState<string[]>([]);
-
   const {
     register,
     setValue,
     formState: { errors },
+    watch,
   } = useFormContext<HotelFormData>();
+  const existingImageUrls = watch("Images");
+  const [previews, setPreviews] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (existingImageUrls)
+      setPreviews((current) => [...current, ...existingImageUrls]);
+  }, [existingImageUrls, setValue]);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -23,16 +30,26 @@ const ImageSection = () => {
       });
 
       Promise.all(fileReaders).then((files) => {
-        setPreviews(files);
+        setPreviews((current) => [...current, ...files]);
         const fileList = new DataTransfer();
         acceptedFiles.forEach((file) => fileList.items.add(file));
-        setValue("Images", fileList.files); // Set the value of the Images field
+        setValue("ImagesFiles", fileList.files);
+
+        // Set the value of the Images field
       });
     },
     [setValue]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const handleDelete = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    src: string
+  ) => {
+    event.preventDefault();
+    setPreviews((current) => current.filter((url) => url !== src));
+  };
 
   return (
     <div>
@@ -44,17 +61,7 @@ const ImageSection = () => {
         <input
           type="file"
           {...getInputProps({ multiple: true })}
-          {...register("Images", {
-            validate: (files) => {
-              if (files.length === 0) {
-                return "At least one image is required";
-              }
-              if (files.length > 6) {
-                return "Maximum number of images is 6";
-              }
-              return true;
-            },
-          })}
+          {...register("ImagesFiles", {})}
           accept="image/*"
         />
         {isDragActive ? (
@@ -63,20 +70,28 @@ const ImageSection = () => {
           <p>Drag 'n' drop some files here, or click to select files</p>
         )}
       </div>
-      <div className="flex flex-wrap gap-2 mt-4">
+      <div className="grid grid-cols-6 gap-4">
         {previews.map((preview, index) => (
-          <div key={index} className="w-24 h-24">
+          <div key={index} className="relative group">
             <img
               src={preview}
               alt={`Preview ${index}`}
-              className="w-full h-full object-cover"
+              className="object-cover min-h-full"
             />
+            <button
+              onClick={(e) => handleDelete(e, preview)}
+              className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 text-white m-x-2 text-5xl"
+            >
+              <BsTrash color="red" />
+            </button>
           </div>
         ))}
       </div>
 
-      {errors.Images && (
-        <span className="text-red-500 text-sm">{errors.Images.message}</span>
+      {errors.ImagesFiles && (
+        <span className="text-red-500 text-sm">
+          {errors.ImagesFiles.message}
+        </span>
       )}
     </div>
   );

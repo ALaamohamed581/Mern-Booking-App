@@ -1,4 +1,14 @@
+import { HotelType } from "../../../../backend/src/shared/sharedTypes/HotelTypes";
 import { regsiterFormData, signInData } from "../types";
+
+// declare global {
+//   namespace Express {
+//     interface Response {
+//       data: Object;
+//     }
+//   }
+// }
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 export const register = async (formData: regsiterFormData) => {
   const response = await fetch(`${API_BASE_URL}api/v1/user/register`, {
@@ -38,6 +48,7 @@ export const valdateToke = async () => {
   const response = await fetch(`${API_BASE_URL}api/v1/user/validate-token`, {
     credentials: "include",
   });
+
   if (!response.ok) {
     throw new Error("invalid token");
   }
@@ -73,5 +84,32 @@ export const fetchMyHotels = async (page: number): Promise<any> => {
     }
   );
   if (!response.ok) throw new Error("error fetching data");
+  return response.json();
+};
+export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
+  const response = await fetch(
+    `${API_BASE_URL}api/v1/my-hotel-routes/get/${hotelId}`,
+    {
+      credentials: "include",
+    }
+  );
+
+  if (!response.ok) throw new Error("error fetching hotle");
+  return response.json();
+};
+export const updateMyHotelById = async (formDataa: any) => {
+  let id = formDataa.get("hotelId");
+  formDataa.delete("hotelId");
+
+  const response = await fetch(
+    `${API_BASE_URL}api/v1/my-hotel-routes/update/${id}`,
+    {
+      method: "PUT",
+      credentials: "include",
+      body: formDataa,
+    }
+  );
+
+  if (!response.ok) throw new Error("error fetching hotle");
   return response.json();
 };

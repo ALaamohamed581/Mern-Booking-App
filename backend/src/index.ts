@@ -28,9 +28,7 @@ app.use(
 //   res.render("index");
 // });
 //static fromnt end files rendering
-app.use(
-  express.static(path.join(__dirname, "../../../frontend/frontend/dist"))
-);
+
 app.use(morgan("short"));
 
 app.use(userRoute);

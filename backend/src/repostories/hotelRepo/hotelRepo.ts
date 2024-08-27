@@ -46,11 +46,7 @@ export const list = async (userId: string, q: any) => {
       .limitFields()
       .paginate();
 
-    console.log(Hotel.find(), q);
-
     const hotels = await proceecedHotesl.query;
-    console.log(userId);
-
     return {
       data: [hotels],
       success: true,
@@ -59,6 +55,75 @@ export const list = async (userId: string, q: any) => {
     };
   } catch (err) {
     console.log(err);
+    return {
+      success: false,
+      code: 500,
+      message: "somthing went wrong",
+    };
+  }
+};
+
+export const update = async (filterObj: any, hotelId: string) => {
+  try {
+    if (!hotelId) {
+      return {
+        success: false,
+        code: 401,
+        message: "please provde a htoel Id",
+      };
+    }
+    filterObj.lastUpdate = new Date();
+    const exstingHotel = await Hotel.findOneAndUpdate(
+      { _id: hotelId },
+      filterObj,
+      { new: true }
+    );
+
+    if (!exstingHotel)
+      return {
+        success: false,
+        code: 404,
+        message: "hotel  not found",
+      };
+    return {
+      data: [exstingHotel],
+      success: true,
+      code: 201,
+      message: "hotel data has been updated",
+    };
+  } catch (err) {
+    return {
+      data: [err],
+      success: false,
+      code: 500,
+      message: "somthing went wrong",
+    };
+  }
+};
+export const get = async (hotelId: string) => {
+  try {
+    if (!hotelId) {
+      return {
+        success: false,
+        code: 401,
+        message: "please provde a htoel Id",
+      };
+    }
+    const exstingHotel = await Hotel.findOne({ _id: hotelId }).lean();
+
+    if (!exstingHotel)
+      return {
+        success: false,
+        code: 404,
+        message: "hotel  not found",
+      };
+    return {
+      data: [exstingHotel],
+      success: true,
+      code: 200,
+      message: "here is  a list of hotels",
+    };
+  } catch (err) {
     return {
       data: [err],
       success: false,

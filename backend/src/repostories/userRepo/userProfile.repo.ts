@@ -9,7 +9,7 @@ export const uploadImage = async (
   try {
     const exsistingUser = await User.findOneAndUpdate(
       { _id: userId },
-      { image: image.filename }
+      { image: image }
     );
     if (!exsistingUser || !image) {
       return {

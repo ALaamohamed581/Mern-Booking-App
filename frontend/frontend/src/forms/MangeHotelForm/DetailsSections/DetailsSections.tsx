@@ -114,7 +114,11 @@ const DetailsSections = () => {
             select as Rating
           </option>
           {[1, 2, 3, 4, 5].map((number) => {
-            return <option value={number}>{number}</option>;
+            return (
+              <option key={crypto.randomUUID()} value={number}>
+                {number}
+              </option>
+            );
           })}
         </select>
         {errors.pricePerNight && (

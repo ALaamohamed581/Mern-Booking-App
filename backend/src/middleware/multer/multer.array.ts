@@ -33,22 +33,6 @@ export const resizeImagesArray = async (
     if (!req.files) return next();
     const directory = path.join(__dirname, "../../public/images/users");
 
-    //   req.body.images = [];
-    //   await Promise.all(
-    //     (req.files as Express.Multer.File[]).map(async (file, i) => {
-    //       const filename = `${req.params.userId}--${
-    //         Math.random() * Date.now() * 26484 * 2
-    //       }${i * Math.random() * 1000}--.jpeg`;
-
-    //       await sharp(file.buffer)
-    //         .resize({ width: 500, height: 500 })
-    //         .toFormat("jpeg")
-    //         .jpeg({ quality: 90 })
-    //         .toFile(`${directory}/${filename}`);
-    //       req.body.images.push(filename);
-    //     })
-    //   );
-
     // 1)  make an array of buffers
     const imageFiles = req.files as Express.Multer.File[];
     const uplaodImagePromisie = imageFiles.map(async (image, i) => {

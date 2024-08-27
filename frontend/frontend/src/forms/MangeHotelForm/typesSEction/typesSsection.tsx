@@ -18,6 +18,7 @@ const TypesSection = () => {
       >
         {hotelTypes.map((type) => (
           <label
+            key={crypto.randomUUID()}
             className={
               typeWatch == type
                 ? "cursor-pointer bg-blue-300 text-sm rounded-full px-4 py-1 font-semibold"

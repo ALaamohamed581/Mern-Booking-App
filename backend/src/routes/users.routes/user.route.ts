@@ -9,8 +9,8 @@ const app = express.Router();
 app.put(
   "/image/:userId",
   upload.single("image"),
-  resizeUserPhoto,
   validator(Userschemas.imageUpload),
+  resizeUserPhoto,
   userProfileControllers.uploadImage
 );
 

@@ -7,7 +7,8 @@ export interface HotelFormData {
   pricePerNight: number;
   starRating: number;
   facilities: string[];
-  Images: FileList;
+  ImagesFiles: FileList;
+  Images: string[];
   adultCount: number;
   childCount: number;
 }

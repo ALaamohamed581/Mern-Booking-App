@@ -6,7 +6,9 @@ import {
 } from "../../middleware/multer/multer.array";
 import {
   createHotel,
+  getHotel,
   listHotels,
+  updateHotel,
 } from "../../controllers/userControllers/hotelcontrollers/myHotesl.controllers";
 import validition from "../../middleware/validatins/valdidatior";
 import hotelSchemas from "../../middleware/validatins/hotel.valdtions";
@@ -22,8 +24,12 @@ app.post(
   resizeImagesArray,
   createHotel
 );
-app.get(
-  "/list",
-
-  listHotels
+app.put(
+  "/update/:hotelId",
+  uploadArray.array("Images", 6),
+  validition(hotelSchemas.update),
+  resizeImagesArray,
+  updateHotel
 );
+app.get("/list", listHotels);
+app.get("/get/:hotelId", getHotel);
