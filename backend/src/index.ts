@@ -7,6 +7,8 @@ import userRoute from "./routes/index";
 import errorHandler from "./middleware/errorrs/error";
 import cookieParser from "cookie-parser";
 import { cloudinaryConnection } from "../config/cloudinary";
+
+import bodyParser from "body-parser";
 import morgan from "morgan";
 const app = express();
 app.use(cookieParser());
@@ -28,6 +30,8 @@ app.use(
 //   res.render("index");
 // });
 //static fromnt end files rendering
+
+app.use(bodyParser.json());
 app.use(
   express.static(path.join(__dirname, "../../../frontend/frontend/dist"))
 );
