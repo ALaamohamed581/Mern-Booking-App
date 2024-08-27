@@ -93,7 +93,7 @@ export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
       credentials: "include",
     }
   );
-  console.log("base", API_BASE_URL);
+
   if (!response.ok) throw new Error("error fetching hotle");
   return response.json();
 };
@@ -107,9 +107,6 @@ export const updateMyHotelById = async (formDataa: any) => {
       method: "PUT",
       credentials: "include",
       body: formDataa,
-      headers: {
-        "Content-Type": "application/json",
-      },
     }
   );
 

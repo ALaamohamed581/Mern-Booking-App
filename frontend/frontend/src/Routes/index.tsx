@@ -31,10 +31,6 @@ const routesConfig = (isLoggedIn: boolean) => {
           path: "/sign-in",
           element: <SignIn />,
         },
-        {
-          path: "/edit-hotel/:hotelId",
-          element: <EditHotel />,
-        },
       ],
     },
     { path: "*", element: <Navigate to="/" /> },
@@ -51,6 +47,12 @@ const routesConfig = (isLoggedIn: boolean) => {
       path: "/my-hotels",
       element: <MyHotels />,
     });
+    if (isLoggedIn) {
+      routes[0].children?.push({
+        path: "/edit-hotel/:hotelId",
+        element: <EditHotel />,
+      });
+    }
   }
 
   return createBrowserRouter(routes);

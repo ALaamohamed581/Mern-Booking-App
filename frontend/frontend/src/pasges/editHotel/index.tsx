@@ -45,7 +45,6 @@ const EditHotel = () => {
     }
   );
   const { showToast } = UseAppContext();
-  console.log(hotel);
   const { mutate, isLoading } = useMutation(apiClient.updateMyHotelById, {
     onSuccess: () => {
       showToast({ message: "Hotel Saved!", type: "SUCCESS" });
