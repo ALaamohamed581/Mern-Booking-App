@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import Toast from "../components/toats";
 import { useQuery } from "react-query";
 import * as apiClient from "../apis/api-clients";
-import { useParams } from "react-router-dom";
 interface ToastMessage {
   message: string;
   type: "SUCCESS" | "ERROR";
@@ -23,10 +22,7 @@ export const AppContextProvider = ({
   const { isError } = useQuery("validteToken", apiClient.valdateToke, {
     retry: 0,
   });
-  if (location.origin.includes("edit-hotel")) {
-    let params = useParams();
-    const { hotelId } = params;
-  }
+
   return (
     <AppContext.Provider
       value={{
