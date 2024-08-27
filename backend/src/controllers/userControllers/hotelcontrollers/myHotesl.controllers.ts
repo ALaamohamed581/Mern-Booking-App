@@ -62,6 +62,8 @@ export const getHotel = async (
       new AppError(operationResultObjec?.data[0]!, operationResultObjec?.code!)
     );
   }
+
+  console.log(operationResultObjec, "fom contelor");
   return res
     .status(operationResultObjec.code)
     .json(operationResultObjec.data[0]);

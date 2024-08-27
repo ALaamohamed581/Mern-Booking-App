@@ -110,6 +110,7 @@ export const get = async (hotelId: string) => {
       };
     }
     const exstingHotel = await Hotel.findOne({ _id: hotelId }).lean();
+    console.log(exstingHotel, "fom repo");
 
     if (!exstingHotel)
       return {
