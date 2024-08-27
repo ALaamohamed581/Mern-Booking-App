@@ -107,6 +107,9 @@ export const updateMyHotelById = async (formDataa: any) => {
       method: "PUT",
       credentials: "include",
       body: formDataa,
+      headers: {
+        "Content-Type": "application/json",
+      },
     }
   );
 
