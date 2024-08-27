@@ -93,7 +93,7 @@ export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
       credentials: "include",
     }
   );
-
+  console.log("here ", response.json());
   if (!response.ok) throw new Error("error fetching hotle");
   return response.json();
 };
