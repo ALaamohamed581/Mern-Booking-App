@@ -87,12 +87,9 @@ export const fetchMyHotels = async (page: number): Promise<any> => {
   return response.json();
 };
 export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
-  const response = await fetch(
-    `${API_BASE_URL}api/v1/my-hotel-routes/get/${hotelId}`,
-    {
-      credentials: "include",
-    }
-  );
+  const response = await fetch(`/api/v1/my-hotel-routes/get/${hotelId}`, {
+    credentials: "include",
+  });
 
   if (!response.ok) throw new Error("error fetching hotle");
   return response.json();
