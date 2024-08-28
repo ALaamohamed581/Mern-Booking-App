@@ -94,7 +94,7 @@ export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
     }
   );
   if (response.url.includes("/edit-hotel")) {
-    response = await fetch(`api/v1/my-hotel-routes/get/${hotelId}`, {
+    response = await fetch(`/api/v1/my-hotel-routes/get/${hotelId}`, {
       credentials: "include",
     });
   }
@@ -114,7 +114,7 @@ export const updateMyHotelById = async (formDataa: any) => {
     }
   );
   if (response.url.includes("/edit-hotel")) {
-    response = await fetch(`api/v1/my-hotel-routes/update/${id}`, {
+    response = await fetch(`/api/v1/my-hotel-routes/update/${id}`, {
       method: "PUT",
       credentials: "include",
       body: formDataa,
