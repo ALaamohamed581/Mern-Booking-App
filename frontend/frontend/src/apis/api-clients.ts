@@ -87,10 +87,17 @@ export const fetchMyHotels = async (page: number): Promise<any> => {
   return response.json();
 };
 export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
-  const response = await fetch(`/api/v1/my-hotel-routes/get/${hotelId}`, {
-    credentials: "include",
-  });
-
+  let response = await fetch(
+    `${API_BASE_URL}api/v1/my-hotel-routes/get/${hotelId}`,
+    {
+      credentials: "include",
+    }
+  );
+  if (response.url.startsWith("/edit-hotel")) {
+    response = await fetch(`api/v1/my-hotel-routes/get/${hotelId}`, {
+      credentials: "include",
+    });
+  }
   if (!response.ok) throw new Error("error fetching hotle");
   return response.json();
 };
@@ -98,7 +105,7 @@ export const updateMyHotelById = async (formDataa: any) => {
   let id = formDataa.get("hotelId");
   formDataa.delete("hotelId");
 
-  const response = await fetch(
+  let response = await fetch(
     `${API_BASE_URL}api/v1/my-hotel-routes/update/${id}`,
     {
       method: "PUT",
@@ -106,7 +113,13 @@ export const updateMyHotelById = async (formDataa: any) => {
       body: formDataa,
     }
   );
-
+  if (response.url.startsWith("/edit-hotel")) {
+    response = await fetch(`api/v1/my-hotel-routes/update/${id}`, {
+      method: "PUT",
+      credentials: "include",
+      body: formDataa,
+    });
+  }
   if (!response.ok) throw new Error("error fetching hotle");
   return response.json();
 };
