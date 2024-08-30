@@ -8,7 +8,7 @@ import PaginatioN from "../../components/pagination";
 import StarRatingFilter from "../../components/starRating cpnent/idex";
 import TypeFilter from "../../components/TypeFilter/TypeFilter";
 import FacilitiesFilter from "../../components/faciltiesFilter";
-import PriceFilter from "../../components/PriceFilter";
+import PriceFIlter from "../../components/priceFIlter";
 const Search = () => {
   const search = useSraechCOntext();
   const [page, setPage] = useState(1);
@@ -81,7 +81,7 @@ const Search = () => {
               selectedFacilities={selectedFacilities}
               onChange={handelFaciltiyChangeChange}
             />
-            <PriceFilter
+            <PriceFIlter
               selectedPrice={selectedPrice}
               onChange={(value?: number) => setSelectedPrice(value)}
             />

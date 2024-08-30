@@ -143,7 +143,7 @@ export const seachHotels = async (seachparams: any): Promise<ReposnObg> => {
   return response.json();
 };
 
-export const constructSeachPraams = (seachparams: SearchParams) => {
+export const constructSeachPraams = (seachparams: any) => {
   const quertyparams = new URLSearchParams();
   quertyparams.append("destination", seachparams.destination || "");
   quertyparams.append("checkIn", seachparams.checkIn || "");

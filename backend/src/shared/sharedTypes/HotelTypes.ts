@@ -1,5 +1,3 @@
-import APIFeatures from "../../helpers/Apiprocceing";
-
 export interface HotelType {
   _id: string;
   userId: string;

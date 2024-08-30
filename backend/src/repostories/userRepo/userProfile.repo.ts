@@ -1,5 +1,4 @@
-import { date } from "joi";
-import { UserType, ReposnObg, CustomFile } from "../../../types";
+import { UserType } from "../../../types";
 import User from "../../models/usser"; // Corrected import path
 
 export const uploadImage = async (

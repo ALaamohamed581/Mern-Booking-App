@@ -1,6 +1,5 @@
 import { UserType, ReposnObg } from "../../../types";
 import User from "../../models/usser"; // Corrected import path
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { SingToken } from "../../utuls/jwt";
 import { comparePassword } from "../../utuls/comparePassword";

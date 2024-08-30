@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import AppError from "../../../helpers/AppError";
-
-import { CustomFile, opertionAlObject } from "../../../../types";
+import { opertionAlObject } from "../../../../types";
 
 import * as profileRepo from "../../../repostories/userRepo/userProfile.repo";
 import { perfromQuery } from "../../../helpers/queryReponse";
