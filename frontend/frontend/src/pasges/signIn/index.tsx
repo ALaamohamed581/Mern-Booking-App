@@ -3,9 +3,10 @@ import { signInData } from "../../types";
 import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../../apis/api-clients";
 import { UseAppContext } from "../../context/AppContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const location = useLocation();
   const { showToast } = UseAppContext(); //قثبهسثTODO
   const navigate = useNavigate();
   const quertClient = useQueryClient();
@@ -22,7 +23,7 @@ const SignIn = () => {
       onSuccess: async () => {
         await quertClient.invalidateQueries("validteToken");
         showToast({ message: "welcome Back", type: "SUCCESS" });
-        navigate("/");
+        navigate(location.state?.from.pathname || "/");
       },
       onError: (error: Error) => {
         showToast({ message: error.message, type: "ERROR" });

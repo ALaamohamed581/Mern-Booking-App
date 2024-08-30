@@ -35,6 +35,6 @@ app.put(
   updateHotel
 );
 app.get("/list", /* verifyToken ,*/ listHotels);
-app.get("/get/:hotelId", verifyToken, getHotel);
+app.get("/get/:hotelId", /*verifyToken,*/ getHotel);
 
 app.get("/search", searchHotel);

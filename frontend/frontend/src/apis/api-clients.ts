@@ -20,6 +20,8 @@ export const register = async (formData: regsiterFormData) => {
 };
 
 export const SignIn = async (formData: signInData) => {
+  console.log(API_BASE_URL);
+
   const response = await fetch(`${API_BASE_URL}api/v1/user/sign-in`, {
     method: "POST",
     credentials: "include",
@@ -29,6 +31,7 @@ export const SignIn = async (formData: signInData) => {
     body: JSON.stringify(formData),
   });
   const reposneBody = await response.json();
+
   console.log(reposneBody);
   if (!response.ok) {
     throw new Error(reposneBody.message);
@@ -139,6 +142,19 @@ export const seachHotels = async (seachparams: any): Promise<ReposnObg> => {
     `${API_BASE_URL}api/v1/my-hotel-routes/search?${quertyparams}`
   );
 
+  if (!response.ok) throw new Error("error fetching hotle");
+  return response.json();
+};
+
+export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
+  let response = await fetch(
+    `${API_BASE_URL}api/v1/my-hotel-routes/get/${hotelId}`
+  );
+  if (response.url.includes("/edit-hotel")) {
+    response = await fetch(`/api/v1/my-hotel-routes/get/${hotelId}`, {
+      credentials: "include",
+    });
+  }
   if (!response.ok) throw new Error("error fetching hotle");
   return response.json();
 };

@@ -15,6 +15,14 @@ const SearchBar = () => {
   const [childCount, setChildCount] = useState<number>(Search.childCount);
 
   const handleSubmit = (event: FormEvent) => {
+    navigate(
+      /*`/search?${constructSeachPraams(Search)}`*/
+
+      {
+        pathname: "search",
+        search: createSearchParams(constructSeachPraams(Search)).toString(),
+      }
+    );
     event.preventDefault();
     Search.saveSearchValue(
       destination,
@@ -23,14 +31,6 @@ const SearchBar = () => {
       adultCount,
       childCount,
       ""
-    );
-    navigate(
-      /*`/search?${constructSeachPraams(Search)}`*/
-
-      {
-        pathname: "search",
-        search: createSearchParams(constructSeachPraams(Search)).toString(),
-      }
     );
   };
   const minDate = new Date();

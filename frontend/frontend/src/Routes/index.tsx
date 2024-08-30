@@ -7,6 +7,7 @@ import Hotel from "../pasges/hotel";
 import MyHotels from "../pasges/myHotels";
 import EditHotel from "../pasges/editHotel";
 import Search from "../pasges/search";
+import Details from "../pasges/detail";
 
 const routesConfig = (isLoggedIn: boolean) => {
   const routes = [
@@ -17,6 +18,11 @@ const routesConfig = (isLoggedIn: boolean) => {
         {
           path: "/",
           element: <Home />,
+          index: true,
+        },
+        {
+          path: "/detail/:hotelId",
+          element: <Details />,
           index: true,
         },
         {
