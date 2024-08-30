@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { HotelType } from "../shared/sharedTypes/HotelTypes";
-import { string } from "joi";
 
 const hotelSchma = new mongoose.Schema<HotelType>({
   userId: { type: String, required: true },
@@ -8,8 +7,8 @@ const hotelSchma = new mongoose.Schema<HotelType>({
   name: { type: String, required: true },
   city: { type: String, required: true },
   country: { type: String, required: true },
-  adultCount: { type: Number, required: true, default: 0 },
-  childCount: { type: Number, required: true },
+  adultCount: { type: Number, required: true, default: 1 },
+  childCount: { type: Number, required: true, default: 0 },
   description: { type: String, required: true },
   facilities: [{ type: String, required: true }],
   Images: [{ type: String, required: true }],

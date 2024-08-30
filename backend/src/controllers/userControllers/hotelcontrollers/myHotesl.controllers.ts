@@ -33,6 +33,7 @@ export const listHotels = async (
   next: NextFunction
 ) => {
   const { userId } = req;
+
   const operationResultObjec =
     ((await hotelRepo.list(userId, req.query)) as opertionAlObject) || null;
 
@@ -63,7 +64,6 @@ export const getHotel = async (
     );
   }
 
-  console.log(operationResultObjec, "fom contelor");
   return res
     .status(operationResultObjec.code)
     .json(operationResultObjec.data[0]);
@@ -103,4 +103,28 @@ export const updateHotel = async (
   return res
     .status(operationResultObjec.code)
     .json(operationResultObjec.data[0]);
+};
+
+export const searchHotel = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const operationResultObjec: any =
+      ((await hotelRepo.search(req.query)) as opertionAlObject) || null;
+
+    if (!operationResultObjec?.success) {
+      return next(
+        new AppError(operationResultObjec?.data[0], operationResultObjec?.code!)
+      );
+    }
+    return res.status(operationResultObjec.code).json({
+      message: operationResultObjec.message,
+      data: operationResultObjec.data,
+    });
+  } catch (err: any) {
+    console.log(err);
+    res.status(500).json({ message: err.message });
+  }
 };

@@ -1,13 +1,6 @@
 import { HotelType } from "../../../../backend/src/shared/sharedTypes/HotelTypes";
 import { regsiterFormData, signInData } from "../types";
-
-// declare global {
-//   namespace Express {
-//     interface Response {
-//       data: Object;
-//     }
-//   }
-// }
+import { ReposnObg } from "../../../../backend/types/responseObjet.type";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 export const register = async (formData: regsiterFormData) => {
@@ -45,7 +38,7 @@ export const SignIn = async (formData: signInData) => {
 };
 
 export const valdateToke = async () => {
-  const response = await fetch(`${API_BASE_URL}api/v1/user/validate-token`, {
+  let response = await fetch(`${API_BASE_URL}api/v1/user/validate-token`, {
     credentials: "include",
   });
 
@@ -122,4 +115,54 @@ export const updateMyHotelById = async (formDataa: any) => {
   }
   if (!response.ok) throw new Error("error fetching hotle");
   return response.json();
+};
+
+export type SearchParams = {
+  destination?: string;
+  checkIn?: string;
+  checkOut?: string;
+  adultCount?: string;
+  childCount?: string;
+  hotelId?: string;
+  page?: string;
+  facilities?: string[];
+  types?: string[];
+  stars?: string[];
+  maxPrice?: string;
+  sortOption?: string;
+};
+
+export const seachHotels = async (seachparams: any): Promise<ReposnObg> => {
+  let quertyparams = constructSeachPraams(seachparams);
+  console.log(quertyparams);
+  const response = await fetch(
+    `${API_BASE_URL}api/v1/my-hotel-routes/search?${quertyparams}`
+  );
+
+  if (!response.ok) throw new Error("error fetching hotle");
+  return response.json();
+};
+
+export const constructSeachPraams = (seachparams: SearchParams) => {
+  const quertyparams = new URLSearchParams();
+  quertyparams.append("destination", seachparams.destination || "");
+  quertyparams.append("checkIn", seachparams.checkIn || "");
+  quertyparams.append("checkOut", seachparams.checkOut || "");
+  quertyparams.append("adultCount", seachparams.adultCount || "");
+  quertyparams.append("childCount", seachparams.childCount || "");
+  quertyparams.append("page", seachparams.page || "");
+
+  quertyparams.append("maxPrice", seachparams.maxPrice || "");
+  quertyparams.append("sortOption", seachparams.sortOption || "");
+
+  seachparams.facilities?.forEach((facility: string) =>
+    quertyparams.append("facilities", facility)
+  );
+  seachparams.types?.forEach((type: string) =>
+    quertyparams.append("types", type)
+  );
+  seachparams.stars?.forEach((star: string) =>
+    quertyparams.append("stars", star)
+  );
+  return quertyparams;
 };

@@ -41,12 +41,6 @@ const MangeHotelForm = ({ onSave, isLoading, hotel }: Props) => {
       formData.append(`facilities[${i}]`, facility);
     });
 
-    // if (formJson.Images) {
-    //   formJson.Images.forEach((url, index) => {
-    //     formData.append(`Images[${index}]`, url);
-    //   });
-    // }
-
     Array.from(formJson.ImagesFiles).forEach((imageFile) => {
       formData.append(`Images`, imageFile);
     });

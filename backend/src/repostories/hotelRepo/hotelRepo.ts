@@ -1,4 +1,4 @@
-import { HotelType } from "../../../types";
+import { HotelType, ReposnObg } from "../../../types";
 import { filterObj } from "../../helpers/filterobj";
 import Hotel from "../../models/hotel";
 import User from "../../models/usser";
@@ -23,28 +23,30 @@ export const create = async (filtriedObg: HotelType) => {
 };
 
 export const list = async (userId: string, q: any) => {
+  console.log(userId);
   try {
-    if (!userId) {
-      return {
-        success: false,
-        code: 401,
-        message: "please sign or register",
-      };
-    }
+    // if (!userId) {
+    //   return {
+    //     success: false,
+    //     code: 401,
+    //     message: "please sign or register",
+    //   };
+    // }
 
-    const exsitiongUser = await User.findOne({ _id: userId });
-    if (!exsitiongUser)
-      return {
-        success: false,
-        code: 404,
-        message: "customer  not found",
-      };
+    // const exsitiongUser = await User.findOne({ _id: userId });
 
+    // if (!exsitiongUser)
+    //   return {
+    //     success: false,
+    //     code: 404,
+    //     message: "customer  not found",
+    //   };
+    const total = await Hotel.countDocuments();
     const proceecedHotesl = new APIFeatures(Hotel.find(), q)
       .filter()
       .sort()
       .limitFields()
-      .paginate();
+      .paginate(total);
 
     const hotels = await proceecedHotesl.query;
     return {
@@ -90,6 +92,60 @@ export const update = async (filterObj: any, hotelId: string) => {
       success: true,
       code: 201,
       message: "hotel data has been updated",
+    };
+  } catch (err) {
+    return {
+      data: [err],
+      success: false,
+      code: 500,
+      message: "somthing went wrong",
+    };
+  }
+};
+export const search = async (q: any) => {
+  try {
+    // if (!hotelId) {
+    //   return {
+    //     success: false,
+    //     code: 401,
+    //     message: "please provde a htoel Id",
+    //   };
+    // }
+    const total = await Hotel.countDocuments();
+    let x = new APIFeatures(Hotel.find(), q).filter();
+
+    x = await x.query;
+    let lettotoalNumberOFresults = { ...x };
+    const keysArray = Object.keys(lettotoalNumberOFresults);
+
+    let hotels = new APIFeatures(Hotel.find(), q)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate(keysArray.length);
+    const paginatedInfo = hotels.getTotal();
+    // if (!exstingHotel)
+    //   return {
+    //     success: false,
+    //     code: 404,
+    //     message: "hotel  not found",
+    //   };
+    hotels = await hotels.query;
+
+    console.log(keysArray.length);
+
+    return <ReposnObg>{
+      data: [
+        hotels,
+        {
+          pagnation: keysArray.length,
+          page: paginatedInfo.pageNumber,
+          pages: paginatedInfo.pages,
+        },
+      ],
+      success: true,
+      code: 200,
+      message: "here is  a list of hotels",
     };
   } catch (err) {
     return {

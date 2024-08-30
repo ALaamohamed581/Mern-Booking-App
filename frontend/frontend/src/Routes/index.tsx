@@ -6,6 +6,7 @@ import SignIn from "../pasges/signIn";
 import Hotel from "../pasges/hotel";
 import MyHotels from "../pasges/myHotels";
 import EditHotel from "../pasges/editHotel";
+import Search from "../pasges/search";
 
 const routesConfig = (isLoggedIn: boolean) => {
   const routes = [
@@ -20,13 +21,17 @@ const routesConfig = (isLoggedIn: boolean) => {
         },
         {
           path: "/search",
-          element: <span className="text-4xl">search page</span>,
+          element: <Search />,
         },
         {
           path: "/register",
           element: <Register />,
         },
 
+        {
+          path: "/sign-in",
+          element: <SignIn />,
+        },
         {
           path: "/sign-in",
           element: <SignIn />,

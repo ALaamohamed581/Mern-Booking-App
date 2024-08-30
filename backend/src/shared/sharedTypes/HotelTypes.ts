@@ -1,3 +1,5 @@
+import APIFeatures from "../../helpers/Apiprocceing";
+
 export interface HotelType {
   _id: string;
   userId: string;
@@ -13,4 +15,18 @@ export interface HotelType {
   starRating: number;
   Images: string[];
   lastUpdated: Date;
+}
+
+export interface hotelSearchReposne {
+  data: [
+    HotelType[],
+    pagnation: {
+      total: number;
+      page: number;
+      pages: number;
+    }
+  ];
+  success: boolean;
+  code: number;
+  message: string;
 }
