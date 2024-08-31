@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { UserType } from "../../types";
 
-const userScehma = new mongoose.Schema({
+const userScehma = new mongoose.Schema<UserType>({
   email: {
     type: String,
     required: true,

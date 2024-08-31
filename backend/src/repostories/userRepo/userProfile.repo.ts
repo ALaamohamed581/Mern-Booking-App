@@ -33,3 +33,23 @@ export const uploadImage = async (
     };
   }
 };
+
+export const get = async (userId: any) => {
+  const exsistingUser = await User.findOne({ _id: userId });
+
+  if (!exsistingUser || !userId) {
+    return {
+      success: false,
+      code: 400,
+      message: "invalid userId or Image",
+    };
+  }
+  const userObject = exsistingUser.toObject() as UserType;
+  delete userObject.password;
+  return {
+    data: [userObject],
+    success: true,
+    code: 200,
+    message: "user image has been uploaded",
+  };
+};

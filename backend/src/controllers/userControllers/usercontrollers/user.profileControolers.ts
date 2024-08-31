@@ -4,6 +4,7 @@ import { opertionAlObject } from "../../../../types";
 
 import * as profileRepo from "../../../repostories/userRepo/userProfile.repo";
 import { perfromQuery } from "../../../helpers/queryReponse";
+import { filterObj } from "../../../helpers/filterobj";
 export const uploadImage = async (
   req: Request,
   res: Response,
@@ -19,4 +20,16 @@ export const uploadImage = async (
 
     perfromQuery(operationResultObjec, next, res);
   }
+};
+
+export const getUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log(req.userId);
+  const operationResultObjec = (await profileRepo.get(
+    req.userId
+  )) as opertionAlObject;
+  perfromQuery(operationResultObjec, next, res);
 };

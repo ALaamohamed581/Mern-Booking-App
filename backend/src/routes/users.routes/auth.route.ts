@@ -1,6 +1,6 @@
 import express from "express";
 import validator from "../../middleware/validatins/valdidatior";
-import Userschemas from "../../middleware/validatins/user.validions";
+import Userschemas from "../../middleware/validatins/user.validation";
 import {
   register,
   login,

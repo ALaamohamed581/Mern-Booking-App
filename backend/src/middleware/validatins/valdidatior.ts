@@ -2,6 +2,9 @@ import { NextFunction, Request, Response } from "express";
 
 const validition = (schema: any) => {
   return (req: Request, res: Response, next: NextFunction) => {
+    delete req.body.hotelId;
+    console.log(req.body);
+
     try {
       const validationResult = schema.validate(req.body);
       const validationErrors: string[] = [];

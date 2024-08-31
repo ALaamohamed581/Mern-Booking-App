@@ -6,5 +6,5 @@ import { verifyToken } from "../../middleware/verifyToken/token.validate.ts";
 
 app.use(AuthRoutes);
 
-app.use(UserRoutes, verifyToken);
+app.use(verifyToken, UserRoutes);
 export default app;

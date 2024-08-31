@@ -1,3 +1,5 @@
+import { bookingsType } from "./bookingType";
+
 export interface HotelType {
   _id: string;
   userId: string;
@@ -13,6 +15,7 @@ export interface HotelType {
   starRating: number;
   Images: string[];
   lastUpdated: Date;
+  bookings: bookingsType[];
 }
 
 export interface hotelSearchReposne {

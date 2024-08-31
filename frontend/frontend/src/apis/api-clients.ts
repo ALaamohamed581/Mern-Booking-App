@@ -1,6 +1,9 @@
 import { HotelType } from "../../../../backend/src/shared/sharedTypes/HotelTypes";
 import { regsiterFormData, signInData } from "../types";
 import { ReposnObg } from "../../../../backend/types/responseObjet.type";
+import { UserType } from "../../../../backend/types";
+import { PaymentIntentResponse } from "../../../../backend/src/shared/sharedTypes/paymentResponse";
+import { BookingFormaData } from "../forms/BookingForm";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 export const register = async (formData: regsiterFormData) => {
@@ -29,6 +32,19 @@ export const SignIn = async (formData: signInData) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(formData),
+  });
+  const reposneBody = await response.json();
+
+  console.log(reposneBody);
+  if (!response.ok) {
+    throw new Error(reposneBody.message);
+  }
+
+  return reposneBody;
+};
+export const fetchCurrentUser = async (): Promise<UserType> => {
+  const response = await fetch(`${API_BASE_URL}api/v1/user/me`, {
+    credentials: "include",
   });
   const reposneBody = await response.json();
 
@@ -137,7 +153,6 @@ export type SearchParams = {
 
 export const seachHotels = async (seachparams: any): Promise<ReposnObg> => {
   let quertyparams = constructSeachPraams(seachparams);
-  console.log(quertyparams);
   const response = await fetch(
     `${API_BASE_URL}api/v1/my-hotel-routes/search?${quertyparams}`
   );
@@ -150,11 +165,49 @@ export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
   let response = await fetch(
     `${API_BASE_URL}api/v1/my-hotel-routes/get/${hotelId}`
   );
-  if (response.url.includes("/edit-hotel")) {
+  if (
+    response.url.includes("/edit-hotel") ||
+    response.url.includes("/detail")
+  ) {
     response = await fetch(`/api/v1/my-hotel-routes/get/${hotelId}`, {
       credentials: "include",
     });
   }
+  if (!response.ok) throw new Error("error fetching hotle");
+  return response.json();
+};
+
+export const createPaymentInttnes = async (
+  hotelId: string,
+  numberOfNights: string
+): Promise<PaymentIntentResponse> => {
+  let response = await fetch(
+    `${API_BASE_URL}api/v1/payments/${hotelId}/bookings/paymnetIntent`,
+    {
+      credentials: "include",
+      method: "POST",
+      body: JSON.stringify({ numberOfNights }),
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  if (!response.ok) throw new Error("error fetching hotle");
+  return response.json();
+};
+
+export const createBooking = async (formData: BookingFormaData) => {
+  let Id = formData.hotelId;
+
+  let response = await fetch(`${API_BASE_URL}api/v1/booking/${Id}/book`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ ...formData }),
+  });
   if (!response.ok) throw new Error("error fetching hotle");
   return response.json();
 };

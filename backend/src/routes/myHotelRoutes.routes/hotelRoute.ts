@@ -10,9 +10,9 @@ import {
   listHotels,
   updateHotel,
   searchHotel,
-} from "../../controllers/userControllers/hotelcontrollers/myHotesl.controllers";
+} from "../../controllers/hotelcontrollers/myHotesl.controllers";
 import validition from "../../middleware/validatins/valdidatior";
-import hotelSchemas from "../../middleware/validatins/hotel.valdtions";
+import hotelSchemas from "../../middleware/validatins/hotel.validation";
 import { verifyToken } from "../../middleware/verifyToken/token.validate.ts";
 const app = express.Router();
 

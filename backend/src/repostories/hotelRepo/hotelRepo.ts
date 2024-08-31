@@ -1,9 +1,6 @@
 import { HotelType, ReposnObg } from "../../../types";
-import { filterObj } from "../../helpers/filterobj";
 import Hotel from "../../models/hotel";
-import User from "../../models/usser";
 import APIFeatures from "../../helpers/Apiprocceing";
-import { date } from "joi";
 export const create = async (filtriedObg: HotelType) => {
   try {
     const newHotel = await Hotel.create(filtriedObg);
@@ -23,24 +20,7 @@ export const create = async (filtriedObg: HotelType) => {
 };
 
 export const list = async (userId: string, q: any) => {
-  console.log(userId);
   try {
-    // if (!userId) {
-    //   return {
-    //     success: false,
-    //     code: 401,
-    //     message: "please sign or register",
-    //   };
-    // }
-
-    // const exsitiongUser = await User.findOne({ _id: userId });
-
-    // if (!exsitiongUser)
-    //   return {
-    //     success: false,
-    //     code: 404,
-    //     message: "customer  not found",
-    //   };
     const total = await Hotel.countDocuments();
     const proceecedHotesl = new APIFeatures(Hotel.find(), q)
       .filter()
@@ -132,8 +112,6 @@ export const search = async (q: any) => {
     //   };
     hotels = await hotels.query;
 
-    console.log(keysArray.length);
-
     return <ReposnObg>{
       data: [
         hotels,
@@ -166,7 +144,6 @@ export const get = async (hotelId: string) => {
       };
     }
     const exstingHotel = await Hotel.findOne({ _id: hotelId }).lean();
-    console.log(exstingHotel, "fom repo");
 
     if (!exstingHotel)
       return {

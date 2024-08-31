@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { HotelType, opertionAlObject } from "../../../../types";
-import AppError from "../../../helpers/AppError";
-import * as hotelRepo from "../../../repostories/hotelRepo/hotelRepo";
-import { filterObj } from "../../../helpers/filterobj";
+import { HotelType, opertionAlObject } from "../../../types";
+import AppError from "../../helpers/AppError";
+import * as hotelRepo from "../../repostories/hotelRepo/hotelRepo";
+import { filterObj } from "../../helpers/filterobj";
 export const createHotel = async (
   req: Request,
   res: Response,
