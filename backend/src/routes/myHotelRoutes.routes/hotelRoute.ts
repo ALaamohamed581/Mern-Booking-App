@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 
 import {
   resizeImagesArray,
@@ -14,6 +14,7 @@ import {
 import validition from "../../middleware/validatins/valdidatior";
 import hotelSchemas from "../../middleware/validatins/hotel.validation";
 import { verifyToken } from "../../middleware/verifyToken/token.validate.ts";
+import Hotel from "../../models/hotel";
 const app = express.Router();
 
 export default app;
@@ -38,3 +39,12 @@ app.get("/list", /* verifyToken ,*/ listHotels);
 app.get("/get/:hotelId", /*verifyToken,*/ getHotel);
 
 app.get("/search", searchHotel);
+
+app.get("/", async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find().sort("-lastUpdated");
+    res.json(hotels);
+  } catch (error) {
+    res.status(500).json("error fetching hotel");
+  }
+});

@@ -9,6 +9,7 @@ import EditHotel from "../pasges/editHotel";
 import Search from "../pasges/search";
 import Details from "../pasges/detail";
 import Booking from "../pasges/Booking";
+import MyBookings from "../pasges/myBookings";
 
 const routesConfig = (isLoggedIn: boolean) => {
   const routes = [
@@ -69,6 +70,12 @@ const routesConfig = (isLoggedIn: boolean) => {
       routes[0].children?.push({
         path: "/hotel/:hotelId/booking",
         element: <Booking />,
+      });
+    }
+    if (isLoggedIn) {
+      routes[0].children?.push({
+        path: "/my-bookings",
+        element: <MyBookings />,
       });
     }
   }

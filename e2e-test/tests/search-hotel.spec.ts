@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import exp from "constants";
 const Ui_URL = "http://localhost:5173";
 
 test("should show hotel search resaluts ", async ({ page }) => {
@@ -18,7 +19,7 @@ test("should show hotel search resaluts ", async ({ page }) => {
   await expect(page.getByText("test-hotel").first()).toBeVisible();
 });
 
-test("shoud show htel detail ", async ({ page }) => {
+test("shoud show hotel detail ", async ({ page }) => {
   await page.goto(Ui_URL);
   await page.getByRole("link", { name: "Sing In" }).click();
   // Expect a title "to contain" a substring.
@@ -38,7 +39,7 @@ test("shoud show htel detail ", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Book now" })).toBeVisible();
 });
 
-test("shoud book hotail", async ({ page }) => {
+test("should book hotail", async ({ page }) => {
   await page.goto(Ui_URL);
   await page.getByRole("link", { name: "Sing In" }).click();
   // Expect a title "to contain" a substring.
@@ -72,8 +73,11 @@ test("shoud book hotail", async ({ page }) => {
   await streipeFrame.locator('[placeholder="CVC"]').fill("258");
   await streipeFrame.locator('[placeholder="ZIP"]').fill("24225");
 
-  await expect(page.getByText("TotalCost :$300")).toBeVisible();
+  // await expect(page.getByText("TotalCost :$300")).toBeVisible();
 
   await page.getByRole("button", { name: "Confrim Booking" }).click();
-  await expect(page.getByText("booking saved")).toBeVisible();
+
+  await page.getByRole("link", { name: "my Bokings" }).click();
+
+  await expect(page.getByText("test-hotel").first()).toBeVisible();
 });

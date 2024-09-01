@@ -161,6 +161,12 @@ export const seachHotels = async (seachparams: any): Promise<ReposnObg> => {
   return response.json();
 };
 
+export const fetchHotels = async () => {
+  let response = await fetch(`${API_BASE_URL}api/v1/my-hotel-routes`);
+
+  if (!response.ok) throw new Error("error fetching hotle");
+  return response.json();
+};
 export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
   let response = await fetch(
     `${API_BASE_URL}api/v1/my-hotel-routes/get/${hotelId}`
@@ -193,6 +199,20 @@ export const createPaymentInttnes = async (
       },
     }
   );
+  if (response.url.includes("/booking")) {
+    response = await fetch(
+      `api/v1/payments/${hotelId}/bookings/paymnetIntent`,
+      {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify({ numberOfNights }),
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
   if (!response.ok) throw new Error("error fetching hotle");
   return response.json();
 };
@@ -207,6 +227,23 @@ export const createBooking = async (formData: BookingFormaData) => {
     },
     credentials: "include",
     body: JSON.stringify({ ...formData }),
+  });
+  if (response.url.includes("/booking")) {
+    response = await fetch(`api/v1/booking/${Id}/book`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ ...formData }),
+    });
+  }
+  if (!response.ok) throw new Error("error fetching hotle");
+  return response.json();
+};
+export const fetchMyBooking = async (): Promise<any[]> => {
+  let response = await fetch(`${API_BASE_URL}api/v1/booking/book`, {
+    credentials: "include",
   });
   if (!response.ok) throw new Error("error fetching hotle");
   return response.json();

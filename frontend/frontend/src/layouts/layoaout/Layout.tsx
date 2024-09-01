@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "../../components/HEADER";
 import Foonter from "../../components/footer";
-import Hero from "../../pasges/Home/Hero";
+import Hero from "../../components/Hero";
 import SearchBar from "../../components/searchBar";
 
 const Layout = () => {
