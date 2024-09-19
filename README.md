@@ -31,22 +31,33 @@ To get started with the project locally, follow these steps:
    git clone https://github.com/ALaamohamed581/Mern-Booking-App.git
    ```
 
-2. **Navigate to the Project Directory:**
+2. **Navigate to the Project Directory:*Frontend*
    ```bash
-   cd Mern-booking-app
+   cd Mern-booking-app/frontend
    ```
 
 3. **Install Dependencies:**
    ```bash
    npm install
    ```
-
 4. **Run the Development Server:**
    ```bash
-   npm start
+   npm run dev
+   ```
+5. **Navigate to the Project Directory:*Backend*
+   ```bash
+   cd Mern-booking-app/backend
+   ```
+6. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
+7. **Navigate to the Project Directory:**
+   ```bash
+   npm run dev
    ```
 
-   The app should now be running at `http://localhost:8000`.
+
 
 ### Technologies Used
 
