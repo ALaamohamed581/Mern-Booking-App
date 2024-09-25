@@ -61,7 +61,7 @@ To get started with the project locally, follow these steps:
 
 ### Technologies Used
 
-- **Frontend:**
+- **Frontend:*
   - ![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?logo=typescript&logoColor=white)
   - ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white)
 
