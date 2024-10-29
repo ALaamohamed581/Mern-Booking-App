@@ -1,4 +1,4 @@
-//function that returns a fucntion weith req,res next
+//function that returns a fucntion with req,res next
 //thanks to closure we are able to use the seconde function
 //this function is the replacemnt function for try/catch block
 import { NextFunction, Request, Response } from "express";
