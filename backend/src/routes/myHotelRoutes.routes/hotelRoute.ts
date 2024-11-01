@@ -21,7 +21,7 @@ export default app;
 
 app.post(
   "/create",
-
+verifyToken ,
   uploadArray.array("Images", 6),
   validition(hotelSchemas.create),
   resizeImagesArray,
@@ -35,8 +35,8 @@ app.put(
   resizeImagesArray,
   updateHotel
 );
-app.get("/list", /* verifyToken ,*/ listHotels);
-app.get("/get/:hotelId", /*verifyToken,*/ getHotel);
+app.get("/list",listHotels);
+app.get("/get/:hotelId", getHotel);
 
 app.get("/search", searchHotel);
 
