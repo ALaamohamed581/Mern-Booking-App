@@ -40,7 +40,6 @@ export const register = cactchAsync(
 export const login = cactchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
-    console.log(req.body);
     const operationResultObjec = (await signIn(
       email,
       password
