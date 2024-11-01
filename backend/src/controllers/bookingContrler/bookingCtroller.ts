@@ -27,7 +27,6 @@ export const creatBooking = async (
         message: `payment intent not scuceded status ${paymentIntent.status}`,
       });
     }
-    console.log(paymentIntent);
     req.body.totalCoast = paymentIntent.amount / 100;
 
     const operationResultObjec =
