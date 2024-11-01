@@ -11,7 +11,7 @@
 - ![Cloudinary](https://img.shields.io/badge/-Cloudinary-3276D8?logo=cloudinary&logoColor=white)
 - ![Stripe](https://img.shields.io/badge/-Stripe-635BFF?logo=stripe&logoColor=white)
 
-## backend enviroment varibles are:
+## backend enviroment variables are:
       -CLOUDNAIRY_CLOUD_KEY
       -CLOUDNAIRY_CLOUD_NAME
       -CLOUDNAIRY_CLOUD_SECRET
@@ -19,7 +19,7 @@
       -MONGO_URL
       -FRONTEND_URL
       -STRIPE_API_KEY
-## frontend enviroment varibles are:
+## frontend enviroment variables are:
       -VITE_API_BASE_URL
       -VITE_STRIPE_PUB_KEY
 
