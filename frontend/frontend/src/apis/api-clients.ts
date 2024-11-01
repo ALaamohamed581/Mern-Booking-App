@@ -201,7 +201,7 @@ export const createPaymentInttnes = async (
   );
   if (response.url.includes("/booking")) {
     response = await fetch(
-      `api/v1/payments/${hotelId}/bookings/paymnetIntent`,
+      `${API_BASE_URL}api/v1/payments/${hotelId}/bookings/paymnetIntent`,
       {
         credentials: "include",
         method: "POST",
@@ -229,7 +229,7 @@ export const createBooking = async (formData: BookingFormaData) => {
     body: JSON.stringify({ ...formData }),
   });
   if (response.url.includes("/booking")) {
-    response = await fetch(`api/v1/booking/${Id}/book`, {
+    response = await fetch(`${API_BASE_URL}api/v1/booking/${Id}/book`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
