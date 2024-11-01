@@ -11,9 +11,17 @@
 - ![Cloudinary](https://img.shields.io/badge/-Cloudinary-3276D8?logo=cloudinary&logoColor=white)
 - ![Stripe](https://img.shields.io/badge/-Stripe-635BFF?logo=stripe&logoColor=white)
 
-### Live Preview
-
-You can try out the live version of the app here: [Live Preview](https://mern-bppking-app.onrender.com/)
+## backend enviroment varibles are:
+      -CLOUDNAIRY_CLOUD_KEY
+      -CLOUDNAIRY_CLOUD_NAME
+      -CLOUDNAIRY_CLOUD_SECRET
+      -JWT_SERCERT
+      -MONGO_URL
+      -FRONTEND_URL
+      -STRIPE_API_KEY
+## frontend enviroment varibles are:
+      -VITE_API_BASE_URL
+      -VITE_STRIPE_PUB_KEY
 
 ### Features
 
