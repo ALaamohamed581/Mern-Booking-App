@@ -4,7 +4,7 @@ import { UseAppContext } from "../../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import * as apiClient from "../../apis/api-clients";
 const Hotel = () => {
-  const { showToast } = UseAppContext(); //قثبهسثTODO
+  const { showToast } = UseAppContext(); 
   const navigate = useNavigate();
 
   const { mutate, isLoading } = useMutation(apiClient.addMyHotel, {
