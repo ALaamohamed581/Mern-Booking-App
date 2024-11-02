@@ -12,16 +12,16 @@
 - ![Stripe](https://img.shields.io/badge/-Stripe-635BFF?logo=stripe&logoColor=white)
 
 ## backend enviroment variables are:
-      -CLOUDNAIRY_CLOUD_KEY
-      -CLOUDNAIRY_CLOUD_NAME
-      -CLOUDNAIRY_CLOUD_SECRET
-      -JWT_SERCERT
-      -MONGO_URL
-      -FRONTEND_URL
-      -STRIPE_API_KEY
+      CLOUDNAIRY_CLOUD_KEY
+      CLOUDNAIRY_CLOUD_NAME
+      CLOUDNAIRY_CLOUD_SECRET
+      JWT_SERCERT
+      MONGO_URL
+      FRONTEND_URL
+      STRIPE_API_KEY
 ## frontend enviroment variables are:
-      -VITE_API_BASE_URL
-      -VITE_STRIPE_PUB_KEY
+      VITE_API_BASE_URL
+      VITE_STRIPE_PUB_KEY
 
 ### Features
 
